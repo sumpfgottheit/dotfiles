@@ -60,21 +60,21 @@ function set_git_branch {
   else
     state="${RED}"
   fi
-  
+
   # Set arrow icon based on status against remote.
   remote_pattern="Your branch is (.*) of"
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
-      remote="↑"
+      remote="â†‘"
     else
-      remote="↓"
+      remote="â†“"
     fi
   else
     remote=""
   fi
   diverge_pattern="Your branch and (.*) have diverged"
   if [[ ${git_status} =~ ${diverge_pattern} ]]; then
-    remote="↕"
+    remote="â†•"
   fi
   
   # Get the name of the branch.
