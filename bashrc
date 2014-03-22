@@ -24,8 +24,6 @@ export EDITOR=vim
 export PS1="\u@\h:\w # "
 export RSYNC_PASSWORD='mysecret'
 
-echo $DOTFILES_DIR
-
 [ -f "${DOTFILES_DIR}/git_bash_prompt.sh" ] && . ${DOTFILES_DIR}/git_bash_prompt.sh
 
 ### Importet from MAC ###
