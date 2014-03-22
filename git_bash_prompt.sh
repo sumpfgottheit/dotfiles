@@ -39,11 +39,6 @@ function is_git_repository {
   git branch > /dev/null 2>&1
 }
 
-# Detect whether the current directory is a subversion repository.
-function is_svn_repository {
-  test -d .svn
-}
-
 function set_virtualenv_prompt {
   if [[ -n "$VIRTUAL_ENV" ]] ; then
     VENV_PROMPT="${BLUE}[${VIRTUAL_ENV##*/}]${COLOR_NONE} "
@@ -67,7 +62,7 @@ function set_git_branch {
   fi
   
   # Set arrow icon based on status against remote.
-  remote_pattern="# Your branch is (.*) of"
+  remote_pattern="Your branch is (.*) of"
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
       remote="↑"
@@ -77,38 +72,19 @@ function set_git_branch {
   else
     remote=""
   fi
-  diverge_pattern="# Your branch and (.*) have diverged"
+  diverge_pattern="Your branch and (.*) have diverged"
   if [[ ${git_status} =~ ${diverge_pattern} ]]; then
     remote="↕"
   fi
   
   # Get the name of the branch.
-  branch_pattern="^# On branch ([^${IFS}]*)"    
+  branch_pattern="^On branch ([^${IFS}]*)"    
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
   fi
 
   # Set the final branch string.
   BRANCH="${state}(${branch})${remote}${COLOR_NONE} "
-}
-
-# Determine the branch information for this subversion repository. No support
-# for svn status, since that needs to hit the remote repository.
-function set_svn_branch {
-  # Capture the output of the "git status" command.
-  svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
-
-  # Get the name of the branch.
-  branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
-  trunk_pattern="^URL: .*/trunk(/.*)?$"
-  if [[ ${svn_info} =~ $branch_pattern ]]; then
-    branch=${BASH_REMATCH[2]}
-  elif [[ ${svn_info} =~ $trunk_pattern ]]; then
-    branch='trunk'
-  fi
-
-  # Set the final branch string.
-  BRANCH="(${branch}) "
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
@@ -131,8 +107,6 @@ function set_bash_prompt () {
   # Set the BRANCH variable.
   if is_git_repository ; then
     set_git_branch
-  elif is_svn_repository ; then
-    set_svn_branch
   else
     BRANCH=''
   fi

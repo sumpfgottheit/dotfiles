@@ -19,3 +19,9 @@ install-git:
 install-misc:
 	rm -f ~/.puppet-lint.rc
 	ln -s `pwd`/puppet-lint.rc ~/.puppet-lint.rc
+
+clean:
+	rm -f ~/{.bashrc,.tmux.conf,.inputrc}
+	rm -fr ~/.vim ~/.vimrc
+	rm -fr ~/.gitconfig
+	rm -f ~/.puppet-lint.rc
