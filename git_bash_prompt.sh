@@ -44,6 +44,15 @@ function is_svn_repository {
   test -d .svn
 }
 
+# Check if X_SCLS is set
+function is_scl {
+	    [[ ! -z "$X_SCLS" ]]
+}
+
+function set_scls {
+	    SCLS="${LIGHT_GRAY}${X_SCLS}${COLOR_NONE}"
+}
+
 function set_virtualenv_prompt {
   if [[ -n "$VIRTUAL_ENV" ]] ; then
     VENV_PROMPT="${BLUE}[${VIRTUAL_ENV##*/}]${COLOR_NONE} "
