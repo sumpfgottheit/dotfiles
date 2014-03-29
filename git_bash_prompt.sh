@@ -44,6 +44,15 @@ function is_svn_repository {
   test -d .svn
 }
 
+# Check if X_SCLS is set
+function is_scl {
+	    [[ ! -z "$X_SCLS" ]]
+}
+
+function set_scls {
+	    SCLS="${LIGHT_GRAY}${X_SCLS}${COLOR_NONE}"
+}
+
 function set_virtualenv_prompt {
   if [[ -n "$VIRTUAL_ENV" ]] ; then
     VENV_PROMPT="${BLUE}[${VIRTUAL_ENV##*/}]${COLOR_NONE} "
@@ -127,6 +136,13 @@ function set_bash_prompt () {
   # return value of the last command.
   set_prompt_symbol $?
 
+  # Set the BRANCH variable.
+  if is_scl ; then
+    set_scls
+  else
+    SCLS=''
+  fi
+							 
   set_virtualenv_prompt
   # Set the BRANCH variable.
   if is_git_repository ; then
