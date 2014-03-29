@@ -36,6 +36,7 @@ if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
 	fi
+	export PATH=~/packer:$PATH
 	export LC_CTYPE=en_US.utf-8
 	export LESS=FRSX
 	export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
@@ -51,5 +52,12 @@ if [[ `uname` == "Darwin" ]]; then
 	source /usr/local/bin/virtualenvwrapper.sh
 	export PATH=$PATH:$HOME/devel/hrng/bin
 	ssh-add -L >/dev/null || ssh-add
+fi
+
+if [[ $USER == 'hr' ]] ; then
+	. /opt/rh/python27/enable
+	export X_SCLS="python27 "
+	. /opt/hr/virtualenv/bin/activate
+	export HR_FLASK_CONFIG="/opt/hrng/application/$(hostname -s).config.py"
 fi
 
