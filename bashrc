@@ -23,6 +23,7 @@ alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 export EDITOR=vim
 export PS1="\u@\h:\w # "
 export RSYNC_PASSWORD='mysecret'
+export LANG='en_US.UTF-8'
 
 [ -f "${DOTFILES_DIR}/git_bash_prompt.sh" ] && . ${DOTFILES_DIR}/git_bash_prompt.sh
 
