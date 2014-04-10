@@ -2,8 +2,9 @@
 install: install-bash install-vim install-git install-misc
 
 install-bash:
-	rm -f ~/{.bashrc,.tmux.conf,.inputrc}
+	rm -f ~/{.bashrc,.tmux.conf,.inputrc,.bash_profile}
 	ln -s `pwd`/bashrc ~/.bashrc
+	ln -s `pwd`/bash_profile ~/.bash_profile
 	ln -s `pwd`/tmux.conf ~/.tmux.conf
 	ln -s `pwd`/inputrc ~/.inputrc
 
@@ -21,7 +22,7 @@ install-misc:
 	ln -s `pwd`/puppet-lint.rc ~/.puppet-lint.rc
 
 clean:
-	rm -f ~/{.bashrc,.tmux.conf,.inputrc}
+	rm -f ~/{.bashrc,.tmux.conf,.inputrc,.bash_profile}
 	rm -fr ~/.vim ~/.vimrc
 	rm -fr ~/.gitconfig
 	rm -f ~/.puppet-lint.rc
