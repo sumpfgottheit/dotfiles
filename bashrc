@@ -61,7 +61,7 @@ if [[ $USER == 'hr' ]] ; then
 	. /opt/rh/python27/enable
 	export X_SCLS="python27 "
 	. /opt/hr/virtualenv/bin/activate
-	export HR_FLASK_CONFIG="/opt/hrng/application/$(hostname -s).config.py"
+	export HR_FLASK_CONFIG="/opt/hr/application/$(hostname -s).config.py"
 fi
 
 
