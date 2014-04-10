@@ -53,6 +53,8 @@ if [[ `uname` == "Darwin" ]]; then
 	source /usr/local/bin/virtualenvwrapper.sh
 	export PATH=$PATH:$HOME/devel/hrng/bin
 	ssh-add -L >/dev/null || ssh-add
+	. /Users/saf/.openshift/bash_autocomplete
+	export PATH="/usr/local/heroku/bin:$PATH"
 fi
 
 if [[ $USER == 'hr' ]] ; then
@@ -61,4 +63,5 @@ if [[ $USER == 'hr' ]] ; then
 	. /opt/hr/virtualenv/bin/activate
 	export HR_FLASK_CONFIG="/opt/hrng/application/$(hostname -s).config.py"
 fi
+
 
