@@ -55,6 +55,7 @@ if [[ `uname` == "Darwin" ]]; then
 	ssh-add -L >/dev/null || ssh-add
 	. /Users/saf/.openshift/bash_autocomplete
 	export PATH="/usr/local/heroku/bin:$PATH"
+	export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
 fi
 
 if [[ $USER == 'hr' ]] ; then
@@ -62,6 +63,7 @@ if [[ $USER == 'hr' ]] ; then
 	export X_SCLS="python27 "
 	. /opt/hr/virtualenv/bin/activate
 	export HR_FLASK_CONFIG="/opt/hr/application/$(hostname -s).config.py"
+	export PATH=/usr/pgsql-9.3/bin/:$PATH
 fi
 
 
