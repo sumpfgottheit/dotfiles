@@ -56,13 +56,20 @@ if [[ `uname` == "Darwin" ]]; then
 	. /Users/saf/.openshift/bash_autocomplete
 	export PATH="/usr/local/heroku/bin:$PATH"
 	export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
+	export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
+fi
+
+X_SCLS=" "
+
+if [[ /opt/rh/ruby193/enable ]] ; then
+	. /opt/rh/ruby193/enable
+	export X_SCLS="ruby193 "
 fi
 
 if [[ $USER == 'hr' ]] ; then
 	. /opt/rh/python27/enable
-	export X_SCLS="python27 "
+	export X_SCLS="$X_SCLS python27 "
 	. /opt/hr/virtualenv/bin/activate
-	export HR_FLASK_CONFIG="/opt/hr/application/$(hostname -s).config.py"
 	export PATH=/usr/pgsql-9.3/bin/:$PATH
 fi
 
