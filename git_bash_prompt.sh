@@ -154,7 +154,7 @@ function set_bash_prompt () {
   fi
   
   # Set the bash prompt variable.
-  PS1="\u@\h:\w ${SCLS}${VENV_PROMPT}${BRANCH}${PROMPT_SYMBOL} "
+  PS1="\u@\h:$(pwd) ${SCLS}${VENV_PROMPT}${BRANCH}\n ${PROMPT_SYMBOL} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.

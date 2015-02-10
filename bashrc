@@ -19,6 +19,7 @@ alias ..='cd ..'
 alias vi='vim'
 alias view='vi -R'
 alias repair_space="sed -i 's/\xc2\xa0/ /g'"
+alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
