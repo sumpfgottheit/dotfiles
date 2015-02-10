@@ -74,3 +74,8 @@ if [[ $USER == 'hr' ]] ; then
 fi
 
 
+if [[ $(hostname) == 'diwa.home' ]] ; then
+	. venv_docker/bin/activate
+	export PATH=$PATH:/root
+	eval "$(_DCUTILS_COMPLETE=source dcutils)"
+fi
