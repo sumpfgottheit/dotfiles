@@ -38,7 +38,7 @@ if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
 	fi
-	export PATH=~/packer:$PATH
+	export PATH=~/bin:~/packer:$PATH
 	export LC_CTYPE=en_US.utf-8
 	export LESS=FRSX
 	export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
@@ -75,7 +75,7 @@ if [[ $USER == 'hr' ]] ; then
 fi
 
 
-if [[ $(hostname) == 'diwa.home' ]] ; then
+if [[ $(hostname) == 'diwa.home' ]] && [[ -d venv_docker ]] ; then
 	. venv_docker/bin/activate
 	export PATH=$PATH:/root
 	eval "$(_DCUTILS_COMPLETE=source dcutils)"
