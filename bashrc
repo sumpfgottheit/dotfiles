@@ -20,6 +20,7 @@ alias vi='vim'
 alias view='vi -R'
 alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
+alias fig='docker-compose'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -43,7 +44,7 @@ if [[ `uname` == "Darwin" ]]; then
 	export LESS=FRSX
 	export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 	export CLICOLOR=1
-	export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/local/libexec/gnubin:$PATH
+	export PATH=/opt/local/bin:/opt/local/sbin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/local/libexec/gnubin:$PATH
 	export MANPATH=/opt/local/share/man:$MANPATH 
 	export ORACLE_HOME=/Users/saf/instantclient_10_2_32bit
 	export DYLD_LIBRARY_PATH=$ORACLE_HOME
