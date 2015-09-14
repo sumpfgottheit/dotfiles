@@ -76,11 +76,6 @@ if [[ $USER == 'hr' ]] ; then
 fi
 
 
-if [[ $(hostname) == 'diwa.home' ]] && [[ -d dcutils ]] ; then
-	. dcutils/bin/activate
-	eval "$(_DCUTILS_COMPLETE=source dcutils)"
-fi
-
 HRNG_IMAGE_DIR=""
 [[ $(hostname -f) == 'lnurn4.schlof.net' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
 [[ $(hostname -s) == 'hrng' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
