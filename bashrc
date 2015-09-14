@@ -80,3 +80,8 @@ if [[ $(hostname) == 'diwa.home' ]] && [[ -d dcutils ]] ; then
 	. dcutils/bin/activate
 	eval "$(_DCUTILS_COMPLETE=source dcutils)"
 fi
+
+[[ $(hostname -f) == 'lnurn4.schlof.net' ]] && export HRNG_IMAGE_DIR=/home/saf/diwa-images
+[[ $(hostname -f) == 'diwa.home' ]] && export HRNG_IMAGE_DIR=/home/saf/diwa/images
+[[ $(hostname -f) == 'hrng.cloudapp.net' ]] && export HRNG_IMAGE_DIR=/home/saf/diwa/images
+
