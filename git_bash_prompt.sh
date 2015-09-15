@@ -33,6 +33,7 @@ LIGHT_GREEN="\[\033[1;32m\]"
       WHITE="\[\033[1;37m\]"
  LIGHT_GRAY="\[\033[0;37m\]"
  COLOR_NONE="\[\e[0m\]"
+ ORANGE="\e[38;5;214m"
 
 # Detect whether the current directory is a git repository.
 function is_git_repository {
@@ -154,7 +155,7 @@ function set_bash_prompt () {
   fi
   
   # Set the bash prompt variable.
-  PS1="\u@\h:$(pwd) ${SCLS}${VENV_PROMPT}${BRANCH}\n ${PROMPT_SYMBOL} "
+  PS1="\u@${ORANGE}\h${COLOR_NONE}:$(pwd) ${SCLS}${VENV_PROMPT}${BRANCH}\n ${PROMPT_SYMBOL} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.
