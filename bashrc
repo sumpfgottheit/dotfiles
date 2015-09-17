@@ -27,7 +27,7 @@ export PS1="\u@\h:\w # "
 export RSYNC_PASSWORD='mysecret'
 export LANG='en_US.UTF-8'
 
-[ -f "${DOTFILES_DIR}/git_bash_prompt.sh" ] && . ${DOTFILES_DIR}/git_bash_prompt.sh
+[ -f "${DOTFILES_DIR}/prompt.sh" ] && . ${DOTFILES_DIR}/prompt.sh
 
 ### Importet from MAC ###
 if [[ `uname` == "Darwin" ]]; then
@@ -61,6 +61,15 @@ if [[ `uname` == "Darwin" ]]; then
 	export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
 fi
 
+if [[ $(hostname -s) == 'safrhel' ]] ; then
+	export PATH=/home/saf/bin:$PATH
+	export WORKON_HOME=~/virtualenvs
+	source /usr/bin/virtualenvwrapper.sh
+	export REQUESTS_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
+	export CURL_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
+fi
+
+
 X_SCLS=" "
 
 if [[ -f /opt/rh/ruby193/enable ]] ; then
@@ -80,5 +89,6 @@ HRNG_IMAGE_DIR=""
 [[ $(hostname -f) == 'lnurn4.schlof.net' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
 [[ $(hostname -s) == 'hrng' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
 [[ $(hostname -f) == 'diwa.home' ]] && HRNG_IMAGE_DIR=/home/saf/diwa/images
+[[ $(hostname -s) == 'safrhel' ]] && HRNG_IMAGE_DIR=/home/saf/diwa/images
 export HRNG_IMAGE_DIR
 
