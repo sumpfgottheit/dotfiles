@@ -153,7 +153,9 @@ function set_bash_prompt () {
   else
     BRANCH=''
   fi
-  USERPROMPT='\u'[[ $(id -u) == 0 ]] && USERPROMPT="${RED}\u${COLOR_NONE}"
+
+  USERPROMPT='\u'
+  [[ $(id -u) == 0 ]] && USERPROMPT="${RED}\u${COLOR_NONE}"
   
   # Set the bash prompt variable.
   PS1="${USERPROMPT}@${ORANGE}\h${COLOR_NONE}:$(pwd) ${SCLS}${VENV_PROMPT}${BRANCH}\n ${PROMPT_SYMBOL} "
