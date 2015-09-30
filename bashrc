@@ -85,10 +85,7 @@ if [[ $USER == 'hr' ]] ; then
 fi
 
 
-HRNG_IMAGE_DIR=""
-[[ $(hostname -f) == 'lnurn4.schlof.net' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
-[[ $(hostname -s) == 'hrng' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
+HRNG_IMAGE_DIR="/home/saf/diwa-images"
 [[ $(hostname -f) == 'diwa.home' ]] && HRNG_IMAGE_DIR=/home/saf/diwa/images
-[[ $(hostname -s) == 'safrhel' ]] && HRNG_IMAGE_DIR=/home/saf/diwa-images
 export HRNG_IMAGE_DIR
 
