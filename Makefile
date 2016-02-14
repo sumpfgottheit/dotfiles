@@ -2,6 +2,7 @@
 install: install-bash install-vim install-git install-misc
 
 install-bash:
+	rm -f ~/.bashrc
 	rm -f ~/{.bashrc,.tmux.conf,.inputrc,.bash_profile}
 	ln -s `pwd`/bashrc ~/.bashrc
 	ln -s `pwd`/bash_profile ~/.bash_profile

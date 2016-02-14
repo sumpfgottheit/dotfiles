@@ -10,8 +10,9 @@ READLINK='readlink -f'
 BASHRC=$($READLINK ${BASH_ARGV[0]})
 DOTFILES_DIR="${BASHRC%/*}"
 
-# Include FINK
-. /sw/bin/init.sh
+HISTCONTROL=ignoreboth
+HISTSIZE=1000
+HISTFILESIZE=2000
 
 set -o vi
 
@@ -37,6 +38,8 @@ if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
 	fi
+	# Include FINK
+	. /sw/bin/init.sh
 	export PATH=~/bin:~/packer:$PATH
 	export LC_CTYPE=en_US.utf-8
 	export LESS=FRSX
