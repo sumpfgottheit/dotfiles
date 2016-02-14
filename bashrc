@@ -10,9 +10,12 @@ READLINK='readlink -f'
 BASHRC=$($READLINK ${BASH_ARGV[0]})
 DOTFILES_DIR="${BASHRC%/*}"
 
+# Include FINK
+. /sw/bin/init.sh
+
 set -o vi
 
-alias ls='ls -h --color=auto'
+#alias ls='ls -h --color=auto'
 alias la='ls -la'
 alias l='ls -l'
 alias ..='cd ..'
@@ -31,11 +34,6 @@ export LANG='en_US.UTF-8'
 
 ### Importet from MAC ###
 if [[ `uname` == "Darwin" ]]; then
-	if [[ $(echo $BASH_VERSION | cut -b1) == "4" ]] ; then
-		if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-			. /opt/local/etc/profile.d/bash_completion.sh
-		fi
-	fi
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
 	fi
@@ -44,15 +42,11 @@ if [[ `uname` == "Darwin" ]]; then
 	export LESS=FRSX
 	export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 	export CLICOLOR=1
-	export PATH=/opt/local/bin:/opt/local/sbin:/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/bin:/usr/local/sbin:~/bin:/opt/local/libexec/gnubin:$PATH
-	export MANPATH=/opt/local/share/man:$MANPATH 
-	export ORACLE_HOME=/Users/saf/instantclient_10_2_32bit
-	export DYLD_LIBRARY_PATH=$ORACLE_HOME
-	alias sql="$ORACLE_HOME/sqlplus sa/support@//pythia.home:1521/wahldb"
+	export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH
 
 	export WORKON_HOME=$HOME/devel/virtualenvs/
 	export PROJECT_HOME=$HOME/devel/
-	source /usr/local/bin/virtualenvwrapper.sh
+	source /sw/bin/virtualenvwrapper.sh
 	export PATH=$PATH:$HOME/devel/hrng/bin
 	ssh-add -L >/dev/null || ssh-add
 	. /Users/saf/.openshift/bash_autocomplete
