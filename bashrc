@@ -16,11 +16,7 @@ HISTFILESIZE=2000
 
 set -o vi
 
-#alias ls='ls -h --color=auto'
-alias la='ls -la'
-alias l='ls -l'
-alias ..='cd ..'
-alias vi='vim'
+alias ls='ls --color=auto'
 alias view='vi -R'
 alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
