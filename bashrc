@@ -16,7 +16,7 @@ HISTFILESIZE=2000
 
 set -o vi
 
-alias ls='ls --color=auto'
+alias ..='cd ..'
 alias l='ls -lh'
 alias la='ls -lha'
 alias view='vi -R'
@@ -31,7 +31,11 @@ export LANG='en_US.UTF-8'
 
 [ -f "${DOTFILES_DIR}/prompt.sh" ] && . ${DOTFILES_DIR}/prompt.sh
 
-### Importet from MAC ###
+
+if [[ $(uname) == 'Linux' ]] ; then
+	alias ls='ls --color=auto'
+fi
+
 if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
