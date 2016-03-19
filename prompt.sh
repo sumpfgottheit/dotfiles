@@ -32,34 +32,14 @@
 LIGHT_GREEN="\[\033[1;32m\]"
       WHITE="\[\033[1;37m\]"
  LIGHT_GRAY="\[\033[0;37m\]"
+       CYAN="\[\033[0;36m\]"
      ORANGE="\e[38;5;208m"
  COLOR_NONE="\[\e[0m\]"
 
 # Detect whether the current directory is a git repository.
 function is_git_repository {
   git branch > /dev/null 2>&1
-}
-
-# Detect whether the current directory is a subversion repository.
-function is_svn_repository {
-  test -d .svn
-}
-
-# Check if X_SCLS is set
-function is_scl {
-	    [[ ! -z "$X_SCLS" ]]
-}
-
-function set_scls {
-	    SCLS="${LIGHT_GRAY}${X_SCLS}${COLOR_NONE}"
-}
-
-function set_virtualenv_prompt {
-  if [[ -n "$VIRTUAL_ENV" ]] ; then
-    VENV_PROMPT="${BLUE}[${VIRTUAL_ENV##*/}]${COLOR_NONE} "
-  else
-    VENV_PROMPT=""
-  fi
+  return $?
 }
 
 # Determine the branch/state information for this git repository.
@@ -77,7 +57,7 @@ function set_git_branch {
   fi
   
   # Set arrow icon based on status against remote.
-  remote_pattern="Your branch is (.*) of"
+  remote_pattern="# Your branch is (.*) of"
   if [[ ${git_status} =~ ${remote_pattern} ]]; then
     if [[ ${BASH_REMATCH[1]} == "ahead" ]]; then
       remote="↑"
@@ -87,38 +67,19 @@ function set_git_branch {
   else
     remote=""
   fi
-  diverge_pattern="Your branch and (.*) have diverged"
+  diverge_pattern="# Your branch and (.*) have diverged"
   if [[ ${git_status} =~ ${diverge_pattern} ]]; then
     remote="↕"
   fi
   
   # Get the name of the branch.
-  branch_pattern="^#? ?On branch ([^${IFS}]*)"    
+  branch_pattern="On branch ([^${IFS}]*)"    
   if [[ ${git_status} =~ ${branch_pattern} ]]; then
     branch=${BASH_REMATCH[1]}
   fi
 
   # Set the final branch string.
-  BRANCH="${state}(${branch})${remote}${COLOR_NONE} "
-}
-
-# Determine the branch information for this subversion repository. No support
-# for svn status, since that needs to hit the remote repository.
-function set_svn_branch {
-  # Capture the output of the "git status" command.
-  svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
-
-  # Get the name of the branch.
-  branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
-  trunk_pattern="^URL: .*/trunk(/.*)?$"
-  if [[ ${svn_info} =~ $branch_pattern ]]; then
-    branch=${BASH_REMATCH[2]}
-  elif [[ ${svn_info} =~ $trunk_pattern ]]; then
-    branch='trunk'
-  fi
-
-  # Set the final branch string.
-  BRANCH="(${branch}) "
+  GIT="${CYAN}git:${state}${branch}${remote}${COLOR_NONE}"
 }
 
 # Return the prompt symbol to use, colorized based on the return value of the
@@ -131,34 +92,60 @@ function set_prompt_symbol () {
   fi
 }
 
+# Determine active Python virtualenv details.
+function set_virtualenv () {
+  if test -z "$VIRTUAL_ENV" ; then
+    PYTHON_VIRTUALENV=""
+  else
+    PYTHON_VIRTUALENV="${CYAN}venv:${YELLOW}`basename \"$VIRTUAL_ENV\"`${COLOR_NONE}"
+  fi
+}
+
+function virtualenv_enabled {
+	test -n "$VIRTUAL_ENV"
+	return $?
+}
+
+function scl_enabled {
+	[[ -n "$X_SCLS" ]] && return 0
+	return 1
+}
+
+function set_scl () {
+	if test -z "$X_SCLS" ; then
+		SCLS=""
+	else
+		SCLS="${CYAN}scls:${YELLOW}${X_SCLS%% }${COLOR_NONE}"
+	fi
+}
+
 # Set the full bash prompt.
 function set_bash_prompt () {
   # Set the PROMPT_SYMBOL variable. We do this first so we don't lose the 
   # return value of the last command.
   set_prompt_symbol $?
 
-  # Set the BRANCH variable.
-  if is_scl ; then
-    set_scls
-  else
-    SCLS=''
+  if virtualenv_enabled || scl_enabled || is_git_repository ; then
+		SCLS=""
+		PYTHON_VIRTUALENV=""
+		GIT=""
+		scl_enabled && set_scl
+		virtualenv_enabled && set_virtualenv
+		is_git_repository && set_git_branch
+		MY_PROMPT="${SCLS} ${PYTHON_VIRTUALENV} ${GIT}"
+		MY_PROMPT=${MY_PROMPT/  / }
+		MY_PROMPT=${MY_PROMPT/  / }
+		MY_PROMPT=${MY_PROMPT/# /}
+		MY_PROMPT=${MY_PROMPT/% /}
+		MY_PROMPT="${LIGHT_GRAY}[${MY_PROMPT}${LIGHT_GRAY}]${COLOR_NONE}"
+  else 
+	MY_PROMPT=""
   fi
-							 
-  set_virtualenv_prompt
-  # Set the BRANCH variable.
-  if is_git_repository ; then
-    set_git_branch
-  elif is_svn_repository ; then
-    set_svn_branch
-  else
-    BRANCH=''
-  fi
-
+  
   USERPROMPT='\u'
   [[ $(id -u) == 0 ]] && USERPROMPT="${RED}\u${COLOR_NONE}"
-  
   # Set the bash prompt variable.
-  PS1="${USERPROMPT}@${ORANGE}\h${COLOR_NONE}:$(pwd) ${SCLS}${VENV_PROMPT}${BRANCH}\n ${PROMPT_SYMBOL} "
+  PS1="$USERPROMPT@${ORANGE}\h${COLOR_NONE}:$(pwd) ${MY_PROMPT}\n ${PROMPT_SYMBOL} "
 }
 
 # Tell bash to execute this function just before displaying its prompt.

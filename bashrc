@@ -69,19 +69,12 @@ if [[ $(hostname -s) == 'safrhel' ]] ; then
 fi
 
 
-X_SCLS=" "
-
-if [[ -f /opt/rh/ruby193/enable ]] ; then
-	. /opt/rh/ruby193/enable
-	export X_SCLS="ruby193"
-fi
-
-if [[ $USER == 'hr' ]] ; then
-	. /opt/rh/python27/enable
-	export X_SCLS="$X_SCLS python27"
-	. /opt/hr/virtualenv/bin/activate
-	export PATH=/usr/pgsql-9.3/bin/:$PATH
-fi
+#if [[ $USER == 'hr' ]] ; then
+#	. /opt/rh/python27/enable
+#	export X_SCLS="$X_SCLS python27"
+#	. /opt/hr/virtualenv/bin/activate
+#	export PATH=/usr/pgsql-9.3/bin/:$PATH
+#fi
 
 
 HRNG_IMAGE_DIR="/home/saf/diwa-images"
