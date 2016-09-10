@@ -5,8 +5,6 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-READLINK='readlink -f'
-[[ $(uname) == 'Darwin' ]] && READLINK='readlink'
 BASHRC=$($READLINK ${BASH_ARGV[0]})
 DOTFILES_DIR="${BASHRC%/*}"
 
@@ -30,6 +28,7 @@ export RSYNC_PASSWORD='mysecret'
 export LANG='en_US.UTF-8'
 
 [ -f "${DOTFILES_DIR}/prompt.sh" ] && . ${DOTFILES_DIR}/prompt.sh
+[ -f "${DOTFILES_DIR}/functions.bash" ] && . ${DOTFILES_DIR}/functions.bash
 
 
 if [[ $(uname) == 'Linux' ]] ; then
