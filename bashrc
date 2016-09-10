@@ -5,6 +5,7 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+[[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
 BASHRC=$($READLINK ${BASH_ARGV[0]})
 DOTFILES_DIR="${BASHRC%/*}"
 
@@ -34,8 +35,6 @@ export LANG='en_US.UTF-8'
 if [[ $(uname) == 'Linux' ]] ; then
 	alias ls='ls --color=auto'
 fi
-
-[[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
 
 if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
