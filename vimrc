@@ -27,6 +27,7 @@ set viminfo='20,\"50
 
 set tabstop=4
 set shiftwidth=4
+set expandtab
 
 set history=5000		" 500 history entries
 set undolevels=5000		" 500 undolevels
