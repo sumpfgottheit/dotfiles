@@ -41,7 +41,7 @@ if [[ `uname` == "Darwin" ]]; then
 		. ~/.git-completion.bash
 	fi
 	# Include FINK
-	. /sw/bin/init.sh
+	[ -f /sw/bin/init.sh ] && . /sw/bin/init.sh
 	export PATH=~/bin:~/packer:$PATH
 	export LC_CTYPE=en_US.utf-8
 	export LESS=FRSX
@@ -51,10 +51,10 @@ if [[ `uname` == "Darwin" ]]; then
 
 	export WORKON_HOME=$HOME/devel/virtualenvs/
 	export PROJECT_HOME=$HOME/devel/
-	source /sw/bin/virtualenvwrapper.sh
+	[ -f /sw/bin/virtualenvwrapper.sh ] && .  /sw/bin/virtualenvwrapper.sh
 	export PATH=$PATH:$HOME/devel/hrng/bin
 	ssh-add -L >/dev/null || ssh-add
-	. /Users/saf/.openshift/bash_autocomplete
+	[ -f /Users/saf/.openshift/bash_autocomplete ] && . /Users/saf/.openshift/bash_autocomplete
 	export PATH="/usr/local/heroku/bin:$PATH"
 	export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
 	export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
