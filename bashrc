@@ -36,6 +36,9 @@ if [[ $(uname) == 'Linux' ]] ; then
 	alias ls='ls --color=auto'
 fi
 
+# Add bindir of dotfiles to path
+export PATH=$DOTFILES_DIR/bin:$PATH
+
 if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash

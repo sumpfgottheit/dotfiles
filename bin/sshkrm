@@ -1,0 +1,11 @@
+#!/bin/bash
+
+function exit1() {
+	echo $*
+	exit
+}
+
+[[ $# == 1 ]] || exit1 "Need a Zahl als Parameter"
+(($1)) || exit1 "Need a Zahl als Parameter"
+
+sed -i -e "${1}d" ~/.ssh/known_hosts
