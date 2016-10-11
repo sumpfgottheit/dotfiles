@@ -7,7 +7,7 @@ fi
 
 [[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
 BASHRC=$($READLINK ${BASH_ARGV[0]})
-DOTFILES_DIR="${BASHRC%/*}"
+export DOTFILES_DIR="${BASHRC%/*}"
 
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
