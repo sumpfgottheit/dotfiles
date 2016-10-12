@@ -89,7 +89,7 @@ HRNG_IMAGE_DIR="/home/saf/diwa-images"
 export HRNG_IMAGE_DIR
 
 if [[ $(hostname -s) == 'arps-devc' ]] ; then
-    [[ -d /arps/virtualenv/bin/activate ]] && . /arps/virtualenv/bin/activate
+    [[ -f /arps/virtualenv/bin/activate ]] && . /arps/virtualenv/bin/activate
     cd /arps/app
 fi
 
