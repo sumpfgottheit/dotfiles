@@ -1,0 +1,52 @@
+#!/bin/bash
+ 
+SMBMOUNTDIR=~/samba
+test -d $SMBMOUNTDIR || mkdir $SMBMOUNTDIR
+
+
+host diskstation  >/dev/null 2>&1 || exit 2
+
+if [[ $# != 1 ]] ; then
+    zenity --info --title "$0" --text "$0 needs parameter start, stop or status" 
+    exit 2
+fi
+
+PARAM=$(echo $1 | tr '[:upper:]' '[:lower:]')
+if ! echo "$PARAM" | grep -q -E 'start|stop|status' ; then
+    zenity --info --title "$0" --text "$0 needs parameter start, stop or status, but got $1"
+    exit 1
+fi
+
+PARAM=$(echo $1 | tr '[:upper:]' '[:lower:]')
+
+case "$1" in
+ 
+    start)
+        # nur mounten, wenn's noch nicht passiert ist sonst beenden
+        mount | grep $USER | grep -q smbnetfs && exit 0
+        # Teste auf Vorhandensein von Konfiguration
+        if ! test -e ~/.smb/smbnetfs.conf; then
+	        zenity --info --title "$0" --text "smbnetfs: No configuration file ~/.smb/smbnetfs.conf found. Exiting."
+        	exit 0
+        fi
+        /usr/bin/smbnetfs $SMBMOUNTDIR
+        ;;
+
+    stop)
+        # nur was tun, wenn's gemountet ist.
+        mount |grep $USER | grep smbnetfs || exit 0
+        /bin/fusermount -u $SMBMOUNTDIR
+    ;;
+
+    status)
+        if mount |grep -q -E "smbnetfs on $SMBMOUNTDIR" ; then
+            echo "Mounted"
+            exit 0
+        else
+            echo "Not mounted"
+            exit 1
+        fi
+    ;;
+ 
+esac
+

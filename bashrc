@@ -39,6 +39,9 @@ fi
 # Add bindir of dotfiles to path
 export PATH=$DOTFILES_DIR/bin:$PATH
 
+#export GREP_OPTIONS='--color=auto' 
+#export GREP_COLOR='1;32'
+
 if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
