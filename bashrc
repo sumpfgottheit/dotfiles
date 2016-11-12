@@ -38,6 +38,7 @@ fi
 
 # Add bindir of dotfiles to path
 export PATH=$DOTFILES_DIR/bin:$PATH
+[[ -d $HOME/apps/bin ]] && export PATH=$PATH:$HOME/apps/bin
 
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
