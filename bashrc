@@ -31,6 +31,19 @@ export LANG='en_US.UTF-8'
 [ -f "${DOTFILES_DIR}/prompt.sh" ] && . ${DOTFILES_DIR}/prompt.sh
 [ -f "${DOTFILES_DIR}/functions.bash" ] && . ${DOTFILES_DIR}/functions.bash
 
+# Newer ipython doesn't use readlin
+# ipython profile create
+IPY_CFG=~/.ipython/profile_default/ipython_config.py
+if [[ ! -f ${IPY_CFG} ]] ; then
+    mkdir -p ~/.ipython/profile_default/
+    touch ${IPY_CFG}
+fi
+if ! grep -q "c.TerminalInteractiveShell.editing_mode" $IPY_CFG ; then
+    echo "c.TerminalInteractiveShell.editing_mode = 'vi'" >> ${IPY_CFG}
+else
+    sed -r -i "s/#?c.TerminalInteractiveShell.editing_mode =.*/c.TerminalInteractiveShell.editing_mode = 'vi'/" ${IPY_CFG}
+fi
+
 
 if [[ $(uname) == 'Linux' ]] ; then
 	alias ls='ls --color=auto'
@@ -42,6 +55,18 @@ export PATH=$DOTFILES_DIR/bin:$PATH
 
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
+
+if [[ $(hostname -s) == 'tuxedogecko' ]] ; then
+    #
+    # Virtualenv for Python 3
+    #
+    export WORKON_HOME=$HOME/devel/_virtualenvs
+    export PROJECT_HOME=$HOME/devel
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+    export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-3.5
+    export VIRTUALENVWRAPPER_VIRTUALENV_CLONE==/usr/bin/virtualenv-clone
+    source /usr/bin/virtualenvwrapper.sh
+fi
 
 if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
