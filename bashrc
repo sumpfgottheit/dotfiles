@@ -56,16 +56,17 @@ export PATH=$DOTFILES_DIR/bin:$PATH
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
 
-if [[ $(hostname -s) == 'tuxedogecko' ]] ; then
+if [[ $(hostname -s) == 'tuxedogecko' ]] || [[ $(hostname -s) == 'tuxedo-mint' ]] ; then
     #
     # Virtualenv for Python 3
     #
-    export WORKON_HOME=$HOME/devel/_virtualenvs
+    VIRTUALENV_WRAPPER=$(which virtualenvwrapper.sh)
+    export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/devel
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-    export VIRTUALENVWRAPPER_VIRTUALENV=/usr/bin/virtualenv-3.5
-    export VIRTUALENVWRAPPER_VIRTUALENV_CLONE==/usr/bin/virtualenv-clone
-    source /usr/bin/virtualenvwrapper.sh
+    export VIRTUALENVWRAPPER_PYTHON=$(which python3)
+    export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
+    export VIRTUALENVWRAPPER_VIRTUALENV_CLONE=$(which virtualenv-clone)
+    source $VIRTUALENV_WRAPPER
 fi
 
 if [[ `uname` == "Darwin" ]]; then
