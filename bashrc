@@ -56,7 +56,7 @@ export PATH=$DOTFILES_DIR/bin:$PATH
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
 
-if [[ $(hostname -s) == 'tuxedogecko' ]] || [[ $(hostname -s) == 'tuxedo-mint' ]] ; then
+if [[ $(hostname -s) == 'tuxedo-tweed' ]] || [[ $(hostname -s) == 'tuxedo-mint' ]] ; then
     #
     # Virtualenv for Python 3
     #
