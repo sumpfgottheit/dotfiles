@@ -22,6 +22,7 @@ alias view='vi -R'
 alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
 alias fig='docker-compose'
+alias vi='vim'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -56,7 +57,7 @@ export PATH=$DOTFILES_DIR/bin:$PATH
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
 
-if [[ $(hostname -s) == 'tuxedo-tweed' ]] || [[ $(hostname -s) == 'tuxedo-mint' ]] ; then
+if [[ $(hostname -s) == 'tuxedo-tweed' ]] || [[ $(hostname -s) == 'tuxedo-mint' ]] || [[ $(hostname -s) == 'tuxedo-arch' ]] ; then
     #
     # Virtualenv for Python 3
     #

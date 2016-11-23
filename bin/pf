@@ -1,0 +1,31 @@
+#!/bin/bash
+
+function usage() {
+    echo
+    echo "pf - Print field"
+    echo "Reads from stdin, prints the field given as parameter and writes it to stdout"
+    echo "Example: cat File | pf 1 | ..."
+    echo "pf just does a  'awk \"{ print \$FIELD_NUMBER; }\" ' "
+}
+
+
+[[ $# == 1 ]] || { echo "One parameter needed" ; usage; exit 1; }
+
+FIELD=$1
+IS_NUMBER=False
+case $FIELD in
+    ''|*[!0-9]*) IS_NUMBER=False ;;
+    *) IS_NUMBER=True ;;
+esac
+
+[[ $IS_NUMBER == "True" ]] || { echo "Parameter needs to be a number" ; usage ; exit 1; }
+
+FIELD=$(( $FIELD - 1 ))
+
+while read line
+do
+    stringarray=($line)
+    echo ${stringarray[$FIELD]}
+done < /dev/stdin
+
+
