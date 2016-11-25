@@ -68,6 +68,11 @@ if [[ $(hostname -s) == 'tuxedo-tweed' ]] || [[ $(hostname -s) == 'tuxedo-mint' 
     export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
     export VIRTUALENVWRAPPER_VIRTUALENV_CLONE=$(which virtualenv-clone)
     source $VIRTUALENV_WRAPPER
+
+    #
+    # Hochrechnung docker-compose-variablen
+    #
+    export DOCKER_HOST_HR_DIR=$HOME/devel/hr
 fi
 
 if [[ `uname` == "Darwin" ]]; then
