@@ -117,7 +117,6 @@ if [[ $(hostname -s) == 'lnurn4' ]] ; then
     alias doco='docker-compose'
 fi
 
-
 if [[ $(hostname -s) == 'arps-devc' ]] ; then
     [[ -f /arps/virtualenv/bin/activate ]] && . /arps/virtualenv/bin/activate
     cd /arps/app
