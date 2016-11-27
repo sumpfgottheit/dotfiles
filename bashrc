@@ -113,17 +113,11 @@ if [[ $(hostname -s) == 'flaskdev' ]] ; then
 fi
 
 
-#if [[ $USER == 'hr' ]] ; then
-#	. /opt/rh/python27/enable
-#	export X_SCLS="$X_SCLS python27"
-#	. /opt/hr/virtualenv/bin/activate
-#	export PATH=/usr/pgsql-9.3/bin/:$PATH
-#fi
+if [[ $(hostname -s) == 'lnurn4' ]] ; then
+	alias doco='docker-compose'
+fi
 
 
-HRNG_IMAGE_DIR="/home/saf/diwa-images"
-[[ $(hostname -f) == 'diwa.home' ]] && HRNG_IMAGE_DIR=/home/saf/diwa/images
-export HRNG_IMAGE_DIR
 
 if [[ $(hostname -s) == 'arps-devc' ]] ; then
     [[ -f /arps/virtualenv/bin/activate ]] && . /arps/virtualenv/bin/activate
