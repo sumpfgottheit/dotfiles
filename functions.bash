@@ -8,7 +8,10 @@ COLOR_LIGHT_RED="\033[1;31m"
 COLOR_LIGHT_GREEN="\033[1;32m"
 COLOR_WHITE="\033[1;37m"
 COLOR_LIGHT_GRAY="\033[0;37m"
+COLOR_CYAN="\033[0;36m"
+COLOR_ORANGE="\e[38;5;208m"
 COLOR_COLOR_NONE="\e[0m"
+
 
 ##############################################
 # Functions that deal with colorizing output #
@@ -40,6 +43,13 @@ function echo_blue {
 	echo_color $COLOR_BLUE $* 
 }
 
+function echo_cyan { 
+	echo_color $COLOR_CYAN $* 
+}
+
+function echo_orange { 
+	echo_color $COLOR_ORANGE $* 
+}
 
 #--------------
 # Move the Cursor 4 Columns to the right and echo a green "success"

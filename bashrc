@@ -119,6 +119,7 @@ fi
 
 if [[ $(hostname -s) == 'arps-devc' ]] ; then
     [[ -f /arps/virtualenv/bin/activate ]] && . /arps/virtualenv/bin/activate
+    export PYTHONPATH=/arps/app
     cd /arps/app
 fi
 
