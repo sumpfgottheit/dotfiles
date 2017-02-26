@@ -108,7 +108,7 @@ if [[ $(hostname -s) == 'safrhel' ]] ; then
 	export CURL_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
 fi
 
-if [[ $(hostname -s) == 'flaskdev' ]] ; then
+if [[ $(hostname -s) == 'flaskdev' ]] || [[ $(hostname -s) == 'devel' ]]; then
 	[[ -d /opt/virtualenv_hr ]] && . /opt/virtualenv_hr/bin/activate
     cd /opt/hr
 fi
