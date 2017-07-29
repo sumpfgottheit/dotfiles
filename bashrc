@@ -57,7 +57,7 @@ export PATH=$DOTFILES_DIR/bin:$PATH
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
 
-if [[ $(hostname -s) == 'tuxedo-tweed' ]] || [[ $(hostname -s) == 'tuxedo-mint' ]] || [[ $(hostname -s) == 'tuxedo-arch' ]] ; then
+if [[ $(hostname -s) == 'safedora' ]] ; then
     #
     # Virtualenv for Python 3
     #
@@ -65,8 +65,8 @@ if [[ $(hostname -s) == 'tuxedo-tweed' ]] || [[ $(hostname -s) == 'tuxedo-mint' 
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/devel
     export VIRTUALENVWRAPPER_PYTHON=$(which python3)
-    export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv)
-    export VIRTUALENVWRAPPER_VIRTUALENV_CLONE=$(which virtualenv-clone)
+    export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv-3.6)
+    export VIRTUALENVWRAPPER_VIRTUALENV_CLONE=$(which virtualenv-clone-3)
     source $VIRTUALENV_WRAPPER
 
 fi
@@ -122,3 +122,4 @@ if [[ $(hostname -s) == 'arps-devc' ]] ; then
     export PYTHONPATH=/arps/app
 fi
 
+[[ -d ~/apps/adb-platform-tools/ ]] && export PATH=$PATH:~/apps/adb-platform-tools/
