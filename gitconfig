@@ -9,7 +9,7 @@
 	ui = auto
 
 [core]
-    pager = less -FRSX
+    pager = cat
 	editor = vim
 
 [alias]
