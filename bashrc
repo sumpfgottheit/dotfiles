@@ -23,6 +23,7 @@ alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
 alias fig='docker-compose'
 alias vi='vim'
+alias dfh='df -h -T | grep -v -E "^tmpfs|devtmpfs"'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
