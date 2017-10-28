@@ -23,6 +23,7 @@ alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
 alias fig='docker-compose'
 alias vi='vim'
+alias doco='docker-compose'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -52,7 +53,7 @@ fi
 
 # Add bindir of dotfiles to path
 export PATH=$DOTFILES_DIR/bin:$PATH
-[[ -d $HOME/apps/bin ]] && export PATH=$PATH:$HOME/apps/bin
+[[ -d $HOME/apps/bin ]] && export PATH=$HOME/apps/bin:$PATH
 
 #export GREP_OPTIONS='--color=auto' 
 #export GREP_COLOR='1;32'
@@ -62,7 +63,7 @@ if [[ $(hostname -s) == 'safedora' ]] ; then
     # Virtualenv for Python 3
     #
     VIRTUALENV_WRAPPER=$(which virtualenvwrapper.sh)
-    export WORKON_HOME=$HOME/.virtualenvs
+    export WORKON_HOME=$HOME/virtualenvs
     export PROJECT_HOME=$HOME/devel
     export VIRTUALENVWRAPPER_PYTHON=$(which python3)
     export VIRTUALENVWRAPPER_VIRTUALENV=$(which virtualenv-3.6)
@@ -113,9 +114,6 @@ if [[ $(hostname -s) == 'flaskdev' ]] || [[ $(hostname -s) == 'devel' ]]; then
     cd /opt/hr
 fi
 
-if [[ $(hostname -s) == 'lnurn4' ]] ; then
-    alias doco='docker-compose'
-fi
 
 if [[ $(hostname -s) == 'arps-devc' ]] ; then
     [[ -f /virtualenv/bin/activate ]] && . /virtualenv/bin/activate
