@@ -24,6 +24,7 @@ alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLat
 alias fig='docker-compose'
 alias vi='vim'
 alias doco='docker-compose'
+alias dfh='df -h -T | grep -v -E "^tmpfs|devtmpfs"'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
