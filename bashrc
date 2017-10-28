@@ -112,7 +112,7 @@ fi
 
 if [[ $(hostname -s) == 'flaskdev' ]] || [[ $(hostname -s) == 'devel' ]]; then
 	[[ -d /opt/virtualenv_hr ]] && . /opt/virtualenv_hr/bin/activate
-    cd /opt/hr
+    [[ -d /opt/hr ]] && cd /opt/hr
 fi
 
 
