@@ -6,8 +6,9 @@ echo "%wheel  ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/wheel
 chmod 0440 /etc/sudoers.d/wheel
 
 yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.rpm.sh | bash
 
-yum -y install git vim-enhanced yum-utils device-mapper-persistent-data lvm2 htop wget fail2ban
+yum -y install git vim-enhanced yum-utils device-mapper-persistent-data lvm2 htop wget fail2ban gitlab-runner
 systemctl enable fail2ban
 systemctl start fail2ban
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
@@ -15,6 +16,7 @@ yum -y install docker-ce
 
 curl -L https://github.com/docker/compose/releases/download/1.17.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
+
 
 userdel -r centos
 
@@ -34,4 +36,7 @@ cd /root
 git clone https://github.com/sumpfgottheit/dotfiles.git
 cd dotfiles
 make
+
+mkdir /opt/docker
+setfacl -m u:saf:rwx -m d:u:saf:rwx -m u:gitlab-runner:rwx -m d:u:gitlab-runner:rwx /opt/docker
 
