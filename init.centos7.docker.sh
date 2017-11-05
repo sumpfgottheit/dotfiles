@@ -2,8 +2,6 @@
 
 yum -y update
 
-groupadd -g 190 docker
-
 echo "%wheel  ALL=(ALL)       NOPASSWD: ALL" > /etc/sudoers.d/wheel
 chmod 0440 /etc/sudoers.d/wheel
 
