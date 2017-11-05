@@ -40,3 +40,8 @@ make
 mkdir /opt/docker
 setfacl -m u:saf:rwx -m d:u:saf:rwx -m u:gitlab-runner:rwx -m d:u:gitlab-runner:rwx /opt/docker
 
+mv /etc/ssh/sshd_config.rpmnew /etc/ssh/sshd_config
+
+sed -i -r 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config 
+sed -i -r 's/PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+systemctl restart sshd
