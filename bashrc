@@ -5,6 +5,10 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi
+
 [[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
 BASHRC=$($READLINK ${BASH_ARGV[0]})
 export DOTFILES_DIR="${BASHRC%/*}"
@@ -20,15 +24,12 @@ alias l='ls -lh'
 alias la='ls -lha'
 alias view='vi -R'
 alias repair_space="sed -i 's/\xc2\xa0/ /g'"
-alias cdmaster='cd /Users/saf/Dropbox/Technikum/MIC/MasterArbeit/MasterarbeitLatex'
-alias fig='docker-compose'
 alias vi='vim'
 alias doco='docker-compose'
 alias dfh='df -h -T | grep -v -E "^tmpfs|devtmpfs"'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
-export RSYNC_PASSWORD='mysecret'
 export LANG='en_US.UTF-8'
 
 [ -f "${DOTFILES_DIR}/prompt.sh" ] && . ${DOTFILES_DIR}/prompt.sh
@@ -73,11 +74,6 @@ if [[ $(hostname -s) == 'safedora' ]] ; then
 
 fi
 
-#
-# Hochrechnung docker-compose-variablen
-#
-[[ -d $HOME/devel/hr ]] && export DOCKER_HOST_HR_DIR=$HOME/devel/hr
-
 if [[ `uname` == "Darwin" ]]; then
 	if [ -f ~/.git-completion.bash ]; then
 		. ~/.git-completion.bash
@@ -110,15 +106,4 @@ if [[ $(hostname -s) == 'safrhel' ]] ; then
 	export CURL_CA_BUNDLE=/etc/pki/tls/certs/ca-bundle.crt
 fi
 
-if [[ $(hostname -s) == 'flaskdev' ]] || [[ $(hostname -s) == 'devel' ]]; then
-	[[ -d /opt/virtualenv_hr ]] && . /opt/virtualenv_hr/bin/activate
-    [[ -d /opt/hr ]] && cd /opt/hr
-fi
-
-
-if [[ $(hostname -s) == 'arps-devc' ]] ; then
-    [[ -f /virtualenv/bin/activate ]] && . /virtualenv/bin/activate
-    export PYTHONPATH=/arps/app
-fi
-
-[[ -d ~/apps/adb-platform-tools/ ]] && export PATH=$PATH:~/apps/adb-platform-tools/
+[[ -n $WORKING_DIR ]] && [[ -d $WORKING_DIR ]] && cd $WORKING_DIR

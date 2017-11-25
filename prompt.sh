@@ -145,8 +145,15 @@ function set_bash_prompt () {
   USERPROMPT='\u'
   [[ $(id -u) == 0 ]] && USERPROMPT="${RED}\u${COLOR_NONE}"
   # Set the bash prompt variable.
+  if [[ -n $TILIX_ID ]] ; then
+      VTE_PWD_THING="$(__vte_osc7)"
+  else
+        VTE_PWD_THING=""
+  fi
   PS1="$USERPROMPT@${ORANGE}\h${COLOR_NONE}:$(pwd) ${MY_PROMPT}\n ${PROMPT_SYMBOL} "
+  PS1="$PS1$VTE_PWD_THING"
 }
+
 
 # Tell bash to execute this function just before displaying its prompt.
 PROMPT_COMMAND=set_bash_prompt
