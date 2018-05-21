@@ -85,9 +85,6 @@ fi
 
 [[ -n $WORKING_DIR ]] && [[ -d $WORKING_DIR ]] && cd $WORKING_DIR
 
-which direnv 2>/dev/null 
-if [[ $? == 0 ]] ; then
-    eval "$(direnv hook bash)"
-else 
-    echo "No direnv installed"
-fi
+export ANSIBLE_CONFIG=~/ansible/ansible.cfg
+
+which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)" 
