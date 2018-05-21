@@ -27,6 +27,7 @@ alias repair_space="sed -i 's/\xc2\xa0/ /g'"
 alias vi='vim'
 alias doco='docker-compose'
 alias dfh='df -h -T | grep -v -E "^tmpfs|devtmpfs"'
+alias git="LANGUAGE=en_US git"
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -74,30 +75,6 @@ if [[ $(hostname -s) == 'safedora' ]] ; then
 
 fi
 
-if [[ `uname` == "Darwin" ]]; then
-	if [ -f ~/.git-completion.bash ]; then
-		. ~/.git-completion.bash
-	fi
-	# Include FINK
-	[ -f /sw/bin/init.sh ] && . /sw/bin/init.sh
-	export PATH=~/bin:~/packer:$PATH
-	export LC_CTYPE=en_US.utf-8
-	export LESS=FRSX
-	export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
-	export CLICOLOR=1
-	export PATH=/Applications/Postgres.app/Contents/Versions/9.3/bin:/usr/local/bin:/usr/local/sbin:~/bin:$PATH
-
-	export WORKON_HOME=$HOME/devel/virtualenvs/
-	export PROJECT_HOME=$HOME/devel/
-	[ -f /sw/bin/virtualenvwrapper.sh ] && .  /sw/bin/virtualenvwrapper.sh
-	export PATH=$PATH:$HOME/devel/hrng/bin
-	ssh-add -L >/dev/null || ssh-add
-	[ -f /Users/saf/.openshift/bash_autocomplete ] && . /Users/saf/.openshift/bash_autocomplete
-	export PATH="/usr/local/heroku/bin:$PATH"
-	export ARCHFLAGS="-Wno-error=unused-command-line-argument-hard-error-in-future"
-	export VAGRANT_DEFAULT_PROVIDER=vmware_fusion
-fi
-
 if [[ $(hostname -s) == 'safrhel' ]] ; then
 	export PATH=/home/saf/bin:$PATH
 	export WORKON_HOME=~/virtualenvs
@@ -107,3 +84,10 @@ if [[ $(hostname -s) == 'safrhel' ]] ; then
 fi
 
 [[ -n $WORKING_DIR ]] && [[ -d $WORKING_DIR ]] && cd $WORKING_DIR
+
+which direnv 2>/dev/null 
+if [[ $? == 0 ]] ; then
+    eval "$(direnv hook bash)"
+else 
+    echo "No direnv installed"
+fi
