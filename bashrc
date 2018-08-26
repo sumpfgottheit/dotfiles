@@ -90,3 +90,4 @@ export ANSIBLE_CONFIG=~/ansible/ansible.cfg
 which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)" 
 which pipenv 2>/dev/null >/dev/null && eval "$(pipenv --completion)"
 
+ssh-add -l >/dev/null || ssh-add
