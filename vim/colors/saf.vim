@@ -16,7 +16,7 @@
 "
 " Thats it ! Hope you like it ! :)
 
-let g:colors_name = "pychimp"
+let g:colors_name = "saf"
 
 " The Basic (Normal) Text Style
 
