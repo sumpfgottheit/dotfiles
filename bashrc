@@ -93,3 +93,9 @@ which pipenv 2>/dev/null >/dev/null && eval "$(pipenv --completion)"
 if [[ $(hostname -s) == 'tuxedo' ]] ; then
     ssh-add -l >/dev/null || ssh-add
 fi
+
+if [[ -d ${HOME}/.pyenv ]] ; then
+    export PATH="${HOME}/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
