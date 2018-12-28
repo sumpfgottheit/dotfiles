@@ -28,6 +28,7 @@ alias vi='vim'
 alias doco='docker-compose'
 alias dfh='df -h -T | grep -v -E "^tmpfs|devtmpfs"'
 alias git="LANGUAGE=en_US git"
+alias si="sudo -i"
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
