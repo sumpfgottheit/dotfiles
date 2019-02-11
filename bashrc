@@ -92,7 +92,7 @@ which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 which pipenv 2>/dev/null >/dev/null && eval "$(pipenv --completion)"
 
 if [[ $(hostname -s) == 'tuxedo' ]] ; then
-    ssh-add -l >/dev/null || ssh-add
+    ssh-add -l >/dev/null 2>&1 || ssh-add
 fi
 
 if [[ -d ${HOME}/.pyenv ]] ; then
