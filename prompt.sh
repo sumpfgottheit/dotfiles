@@ -85,10 +85,10 @@ function set_git_branch {
 # Return the prompt symbol to use, colorized based on the return value of the
 # previous command.
 function set_prompt_symbol () {
-  if test $1 -eq 0 ; then
+  if test $? -eq 0 ; then
       PROMPT_SYMBOL="${GREEN}#${COLOR_NONE}"
   else
-      PROMPT_SYMBOL="${RED}#${COLOR_NONE}"
+      PROMPT_SYMBOL="${RED}!${COLOR_NONE}"
   fi
 }
 

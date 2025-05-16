@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Farben definieren
+RED='\033[1;31m'
+YELLOW='\033[1;33m'
+RESET='\033[0m'
+
+# df ausführen und sortieren (nach Mountpoint / Spalte 6)
+df -hP grep -v -E "^tmpfs|devtmpfs" | (
+    read -r header
+    echo -e "$header"
+    while read -r line; do
+        # Belegungswert (z. B. "85%") extrahieren → nur Zahl
+        usage=$(echo "$line" | awk '{gsub(/%/,"",$5); print $5}')
+        
+        # Zeile einfärben je nach Nutzung
+        if (( usage >= 100 )); then
+            echo -e "${RED}${line}${RESET}"
+        elif (( usage >= 80 )); then
+            echo -e "${YELLOW}${line}${RESET}"
+        else
+            echo "$line"
+        fi
+    done
+) | sort -k6
+
