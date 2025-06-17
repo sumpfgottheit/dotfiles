@@ -55,6 +55,7 @@ fi
 
 # Add bindir of dotfiles to path
 export PATH=$DOTFILES_DIR/bin:$PATH
+[[ -d $HOME/bin ]] && export PATH=$HOME/bin:$PATH
 [[ -d $HOME/apps/bin ]] && export PATH=$HOME/apps/bin:$PATH
 
 which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)" 

@@ -5,22 +5,26 @@ RED='\033[1;31m'
 YELLOW='\033[1;33m'
 RESET='\033[0m'
 
-# df ausführen und sortieren (nach Mountpoint / Spalte 6)
-df -hP grep -v -E "^tmpfs|devtmpfs" | (
-    read -r header
-    echo -e "$header"
-    while read -r line; do
-        # Belegungswert (z. B. "85%") extrahieren → nur Zahl
-        usage=$(echo "$line" | awk '{gsub(/%/,"",$5); print $5}')
-        
-        # Zeile einfärben je nach Nutzung
-        if (( usage >= 100 )); then
-            echo -e "${RED}${line}${RESET}"
-        elif (( usage >= 80 )); then
-            echo -e "${YELLOW}${line}${RESET}"
-        else
-            echo "$line"
-        fi
-    done
-) | sort -k6
+# Daten vorbereiten
+data=$(df -hP | grep -v -E "^tmpfs|devtmpfs|efivarfs|shm|overlay")
+
+
+# Header extrahieren
+header=$(echo "$data" | head -n1)
+
+# Zeilen ohne Header verarbeiten
+body=$(echo "$data" | tail -n +2 | while read -r line; do
+    usage=$(echo "$line" | awk '{gsub(/%/,"",$5); print $5}')
+    if (( usage >= 100 )); then
+        echo -e "${RED}${line}${RESET}"
+    elif (( usage >= 80 )); then
+        echo -e "${YELLOW}${line}${RESET}"
+    else
+        echo "$line"
+    fi
+done | sort -k6)
+
+# Ausgabe
+echo -e "$header"
+echo "$body"
 
