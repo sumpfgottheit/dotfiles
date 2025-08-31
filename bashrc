@@ -35,26 +35,13 @@ export LANG='en_US.UTF-8'
 #[ -f "${DOTFILES_DIR}/prompt.sh" ] && . ${DOTFILES_DIR}/prompt.sh
 [ -f "${DOTFILES_DIR}/functions.bash" ] && . ${DOTFILES_DIR}/functions.bash
 
-# Newer ipython doesn't use readlin
-# ipython profile create
-IPY_CFG=~/.ipython/profile_default/ipython_config.py
-if [[ ! -f ${IPY_CFG} ]] ; then
-    mkdir -p ~/.ipython/profile_default/
-    touch ${IPY_CFG}
-fi
-if ! grep -q "c.TerminalInteractiveShell.editing_mode" $IPY_CFG ; then
-    echo "c.TerminalInteractiveShell.editing_mode = 'vi'" >> ${IPY_CFG}
-else
-    sed -r -i "s/#?c.TerminalInteractiveShell.editing_mode =.*/c.TerminalInteractiveShell.editing_mode = 'vi'/" ${IPY_CFG}
-fi
-
-
 if [[ $(uname) == 'Linux' ]] ; then
 	alias ls='ls --color=auto'
 fi
 
 # Add bindir of dotfiles to path
 export PATH=$DOTFILES_DIR/bin:$PATH
+
 [[ -d $HOME/bin ]] && export PATH=$HOME/bin:$PATH
 [[ -d $HOME/apps/bin ]] && export PATH=$HOME/apps/bin:$PATH
 
@@ -62,39 +49,6 @@ which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 
 [[ -d ${HOME}/.bash_profile ]] && . ${HOME}/.bash_profile
 
-[[ -f "$HOME/.local/bin/env" ]] && . "$HOME/.local/bin/env"
-which kubectl 2>/dev/null >/dev/null
-if [[ $? == 0  ]] ; then 
-    alias k='kubectl'
-    source <(kubectl completion bash)
-    complete -o default -F __start_kubectl k
-fi
-
 which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
 
-### HSTR
-alias hh=hstr                    # hh to be alias for hstr
-export HSTR_CONFIG=hicolor,raw-history-view       # get more colors
-shopt -s histappend              # append new history items to .bash_history
-export HISTCONTROL=ignorespace   # leading space hides commands from history
-export HISTFILESIZE=10000        # increase history file size (default is 500)
-export HISTSIZE=${HISTFILESIZE}  # increase history size (default is 500)
-# ensure synchronization between bash memory and history file
-function hstr_prompt_with_save {
-    local exit_code=$?
-    history -a
-    history -n
-    return $exit_code
-}
-export PROMPT_COMMAND="hstr_prompt_with_save; ${PROMPT_COMMAND}"
-#export PROMPT_COMMAND="history -a; history -n; ${PROMPT_COMMAND}"
-function hstrnotiocsti {
-    { READLINE_LINE="$( { </dev/tty hstr ${READLINE_LINE}; } 2>&1 1>&3 3>&- )"; } 3>&1;
-    READLINE_POINT=${#READLINE_LINE}
-}
-# if this is interactive shell, then bind hstr to Ctrl-r (for Vi mode check doc)
-if [[ $- =~ .*i.* ]]; then bind -x '"\C-r": "hstrnotiocsti"'; fi
-export HSTR_TIOCSTI=n
-
-export KUBECONFIG=~/.kube/config
-
+which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
