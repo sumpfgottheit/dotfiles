@@ -10,3 +10,6 @@ install:
 	install -D ghostty-config ~/.config/ghostty/config
 	mkdir -p ~/bin
 	cp -a bin/* ~/bin
+	mkdir -p ~/.config/direnv
+	cp direnvrc ~/.config/direnv
+	cp starship.toml ~/.config/ 
