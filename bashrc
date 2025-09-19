@@ -32,6 +32,7 @@ export LANG='en_US.UTF-8'
 
 # Add bindir of dotfiles to path
 [[ -d $HOME/bin ]] && export PATH=$HOME/bin:$PATH
+[[ -d $HOME/go/bin ]] && export PATH=$HOME/go/bin:$PATH
 [[ -d $HOME/apps/bin ]] && export PATH=$HOME/apps/bin:$PATH
 
 which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)" 
