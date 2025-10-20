@@ -42,3 +42,15 @@ which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
 
 which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
+
+which restish 2>/dev/null >/dev/null && eval "$(restish completion bash)"
+
+which go-task 2>/dev/null >/dev/null && alias got='go-task'
+
+# pnpm
+export PNPM_HOME="/home/saf/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
