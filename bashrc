@@ -25,6 +25,7 @@ alias l='ls -lh'
 alias la='ls -lha'
 alias view='vi -R'
 alias vi='vim'
+alias nano='vim'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -54,3 +55,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+[[ -d /home/saf/.opencode/bin ]] && export PATH=/home/saf/.opencode/bin:$PATH
+
