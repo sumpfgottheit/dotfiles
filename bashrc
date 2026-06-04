@@ -11,6 +11,16 @@ fi
 
 [[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
 
+if command -v gls &>/dev/null; then
+  alias ls='gls --color=auto'
+  alias ll='gls -lah --color=auto'
+else
+  # Fallback, falls gls mal nicht verfügbar ist
+  export CLICOLOR=1
+  alias ls='ls -GH'
+  alias ll='ls -lahGH'
+fi
+
 HISTCONTROL=ignoreboth
 HISTSIZE=1000
 HISTFILESIZE=2000
