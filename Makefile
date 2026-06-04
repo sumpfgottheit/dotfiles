@@ -7,7 +7,8 @@ install:
 	cp tmux.conf ~/.tmux.conf
 	cp vimrc ~/.vimrc
 	cp -a vim ~/.vim
-	install -D ghostty-config ~/.config/ghostty/config
+	mkdir -p ~/.config/ghostty
+	cp ghostty-config ~/.config/ghostty/config
 	mkdir -p ~/bin
 	cp -a bin/* ~/bin
 	mkdir -p ~/.config/direnv
