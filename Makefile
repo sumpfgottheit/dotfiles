@@ -14,3 +14,6 @@ install:
 	mkdir -p ~/.config/direnv
 	cp direnvrc ~/.config/direnv
 	cp starship.toml ~/.config/ 
+	mkdir -p ~/.config/git/
+	cp gitignore ~/.config/git/ignore
+
