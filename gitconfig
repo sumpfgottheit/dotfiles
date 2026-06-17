@@ -21,12 +21,6 @@
 	ff = !git flow feature finish $1 && git push
 	create-pull-request = !sh -c 'stash pull-request $0'
 	co = !git checkout
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [credential]
 	helper = store
 [init]
