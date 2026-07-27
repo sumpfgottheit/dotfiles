@@ -1,7 +1,7 @@
 # $username$hostname$localip$shlvl$singularity$kubernetes$nats$directory$vcsh$fossil_branch$fossil_metrics$git_branch$git_commit$git_state$git_metrics$git_status$hg_branch$pijul_channel$docker_context$package$bun$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam$golang$gradle$haskell$haxe$helm$java$julia$kotlin$lua$mojo$nim$nodejs$ocaml$odin$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust$scala$solidity$swift$terraform$typst$vlang$vagrant$zig$buf$guix_shell$nix_shell$conda$meson$spack$memory_usage$aws$gcloud$openstack$azure$direnv$env_var$crystal$custom$sudo$cmd_duration$line_break$jobs$battery$time$status$container$os$shell$character
 
 #format = "$username@$hostname:$directory$kubernetes$git_branch$git_status$python$line_break$character"
-format = "$os$username@$hostname:$directory$kubernetes$git_branch$git_status$python$line_break$character"
+format = "$os$username@$hostname:$directory$kubernetes${custom.git_icon}$git_branch$git_status$python$line_break$character"
 
 [username]
 style_user = 'white bold'
@@ -86,11 +86,18 @@ format = '\[[$symbol$branch]($style)\]'
 format = '\[[$symbol$account(@$domain)(\($region\))]($style)\]'
 
 [git_branch]
+symbol = ""
 format = '[$symbol$branch]($style) '
 
 [git_status]
 style = 'bold cyan'
 format = '([\[$conflicted$staged$deleted$renamed$stashed$untracked$ahead_behind\]]($style)) '
+
+[custom.git_icon]
+# Green when clean, red when dirty
+command = 'if git status --porcelain 2>/dev/null | head -n 1 | grep -q .; then printf "\033[1;31m \033[0m"; else printf "\033[1;32m \033[0m"; fi'
+description = "Colored git icon"
+when = "git rev-parse --is-inside-work-tree 2>/dev/null"
 
 [golang]
 format = '\[[$symbol($version)]($style)\]'

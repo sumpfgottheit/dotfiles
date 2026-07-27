@@ -25,7 +25,6 @@ then
   fi
 fi
 
-
 [[ -x /opt/homebrew/bin/mg ]] && alias magr="/opt/homebrew/bin/mg"
 [[ -x /opt/homebrew/bin/vim ]] && alias vi="/opt/homebrew/bin/vi"
 
@@ -74,8 +73,5 @@ which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
 which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
 
-cat << EOF >> ~/.bash_profile
-# Add Visual Studio Code (code)
-export PATH="\$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
-EOF
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
