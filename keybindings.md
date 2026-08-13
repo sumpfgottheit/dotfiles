@@ -41,8 +41,10 @@ liegen auf `Alt`/`⌘` pur, Fokus eine Ebene tiefer auf `Alt+Shift`/`⌘⇧`.
 
 | Aktion | macOS | Windows |
 |---|---|---|
-| **Tab** vorheriger / nächster (h/k · j/l) | `⌘H`/`⌘K` · `⌘J`/`⌘L` | `Alt+H`/`Alt+K` · `Alt+J`/`Alt+L` |
-| Tab vorheriger / nächster (Pfeile) | `⌘←`/`⌘↑` · `⌘↓`/`⌘→` | `Alt+←`/`Alt+↑` · `Alt+↓`/`Alt+→` |
+| **Tab** vorheriger (h/j) | `⌘H` / `⌘J` | `Alt+H` / `Alt+J` |
+| **Tab** nächster (k/l) | `⌘K` / `⌘L` | `Alt+K` / `Alt+L` |
+| Tab vorheriger (Pfeile) | `⌘←` / `⌘↓` | `Alt+←` / `Alt+↓` |
+| Tab nächster (Pfeile) | `⌘↑` / `⌘→` | `Alt+↑` / `Alt+→` |
 | Tab vor / zurück (Alternative) | `⌃←` / `⌃→` | `Ctrl+←` / `Ctrl+→` |
 | **Fokus** links / unten / oben / rechts | `⌘⇧H` `⌘⇧J` `⌘⇧K` `⌘⇧L` | `Alt+⇧H` `Alt+⇧J` `Alt+⇧K` `Alt+⇧L` |
 | Fokus (Pfeile) | `⌘⇧←` `⌘⇧↓` `⌘⇧↑` `⌘⇧→` | `Alt+⇧←` `Alt+⇧↓` `Alt+⇧↑` `Alt+⇧→` |
@@ -55,9 +57,9 @@ liegen auf `Alt`/`⌘` pur, Fokus eine Ebene tiefer auf `Alt+Shift`/`⌘⇧`.
 | Locked-Modus an/aus | `⌃G` | `Ctrl+G` |
 | Zellij beenden | `⌃Q` | `Ctrl+Q` |
 
-Tab-Zuordnung h/k = vorheriger, j/l = nächster ist deckungsgleich mit Zellijs
-eigenem Tab-Modus (`Ctrl+T`, dann `h`/`k`/`j`/`l`) — bewusst dieselbe Richtung,
-damit man sich nicht zwei Konventionen merken muss.
+Tab-Zuordnung: linkes Paar `h`/`j` = vorheriger, rechtes Paar `k`/`l` =
+nächster Tab. Jeder Pfeil spiegelt sein vim-Pendant (`h`~`←`, `j`~`↓`,
+`k`~`↑`, `l`~`→`), damit Buchstabe und Pfeil immer dieselbe Aktion auslösen.
 
 `⌘H` war früher „Ghostty ausblenden" (AppKit-Menüeintrag, von
 `keybind = clear` nicht erreichbar) — deshalb bislang nur `⌥H`, ohne Cmd.

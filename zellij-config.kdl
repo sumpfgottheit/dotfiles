@@ -160,17 +160,19 @@ keybinds clear-defaults=true {
         // (`defaults read com.mitchellh.ghostty NSUserKeyEquivalents` -> "@^$h"),
         // ist Cmd+H frei -- daher jetzt ueberall Alt UND Super gebunden.
 
-        // Tabs wechseln: h/k = vorheriger, j/l = naechster Tab -- deckungsgleich
-        // mit Zellijs eigenem tab-Modus weiter unten (Ctrl+T, dann h/j/k/l).
-        // Fokus und Tabwechsel teilen sich absichtlich nie einen Shortcut:
-        // Tabs liegen auf Alt/Super pur, Fokus eine Ebene tiefer auf +Shift.
+        // Tabs wechseln: linkes Paar h/j = vorheriger, rechtes Paar k/l =
+        // naechster Tab. Pfeile spiegeln ihr vim-Pendant (h~Left, j~Down,
+        // k~Up, l~Right), damit Buchstabe und Pfeil immer dieselbe Aktion
+        // ausloesen. Fokus und Tabwechsel teilen sich absichtlich nie einen
+        // Shortcut: Tabs liegen auf Alt/Super pur, Fokus eine Ebene tiefer
+        // auf +Shift.
         bind "Alt h" "Super h" { GoToPreviousTab; }
-        bind "Alt j" "Super j" { GoToNextTab; }
-        bind "Alt k" "Super k" { GoToPreviousTab; }
+        bind "Alt j" "Super j" { GoToPreviousTab; }
+        bind "Alt k" "Super k" { GoToNextTab; }
         bind "Alt l" "Super l" { GoToNextTab; }
         bind "Alt left" "Super left" { GoToPreviousTab; }
-        bind "Alt up" "Super up" { GoToPreviousTab; }
-        bind "Alt down" "Super down" { GoToNextTab; }
+        bind "Alt down" "Super down" { GoToPreviousTab; }
+        bind "Alt up" "Super up" { GoToNextTab; }
         bind "Alt right" "Super right" { GoToNextTab; }
         bind "Ctrl left" { GoToPreviousTab; }
         bind "Ctrl right" { GoToNextTab; }
