@@ -45,4 +45,27 @@
 cursor-style = block
 cursor-style-blink = false
 shell-integration-features = no-cursor
+command = /opt/homebrew/bin/bash
 font-family = "JetBrainsMono Nerd Font"
+theme = TokyoNight
+
+# Linke Option = Alt -> Zellij-Direktaktionen.
+# Rechte Option bleibt Compose. Auf der Keychron K1 Pro liegt sie durch den
+# Karabiner-Swap (right_command <-> right_option) neben der Leertaste und
+# ersetzt AltGr fuer \ [ ] { } @
+macos-option-as-alt = left
+
+# Modifier-Vertrag:
+#   Ctrl+<Buchstabe>   -> Zellij-Modi
+#   Alt+<Buchstabe>    -> Zellij-Direktaktionen
+#   Ctrl+Shift+<Taste> -> Emulator, nur Copy/Paste + Font
+keybind = clear
+keybind = ctrl+shift+c=copy_to_clipboard:mixed
+keybind = ctrl+shift+v=paste_from_clipboard
+keybind = ctrl+shift+arrow_up=increase_font_size:1
+keybind = ctrl+shift+arrow_down=decrease_font_size:1
+keybind = ctrl+shift+0=reset_font_size
+
+# macOS-Komfort, bewusste Ausnahme vom Vertrag (kein Windows-Aequivalent noetig)
+keybind = super+c=copy_to_clipboard:mixed
+keybind = super+v=paste_from_clipboard

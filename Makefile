@@ -9,6 +9,9 @@ install:
 	cp -a vim ~/.vim
 	mkdir -p ~/.config/ghostty
 	cp ghostty-config ~/.config/ghostty/config
+	mkdir -p ~/.config/zellij/layouts
+	cp zellij-config.kdl ~/.config/zellij/config.kdl
+	cp zellij-layout-default.kdl ~/.config/zellij/layouts/default.kdl
 	mkdir -p ~/bin
 	cp -a bin/* ~/bin
 	mkdir -p ~/.config/direnv
