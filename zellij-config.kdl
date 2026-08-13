@@ -153,12 +153,39 @@ keybinds clear-defaults=true {
         // ESC[>1u, Ghostty kodiert Cmd+u als ESC[117;9u). Windows Terminal kann
         // das nicht -- dort greifen die Alt-Varianten, die Super-Bindings sind
         // dort wirkungslos, aber harmlos.
-        bind "Alt left" "Super left" { MoveFocus "left"; }
-        bind "Alt down" "Super down" { MoveFocus "down"; }
-        bind "Alt up" "Super up" { MoveFocus "up"; }
-        bind "Alt right" "Super right" { MoveFocus "right"; }
+        //
+        // Cmd+H war frueher "Ghostty ausblenden" (AppKit-Menueintrag, von
+        // "keybind = clear" nicht erreichbar). Seit Hide in den macOS-
+        // Kurzbefehl-Einstellungen auf Cmd+Ctrl+Shift+H verlegt wurde
+        // (`defaults read com.mitchellh.ghostty NSUserKeyEquivalents` -> "@^$h"),
+        // ist Cmd+H frei -- daher jetzt ueberall Alt UND Super gebunden.
+
+        // Tabs wechseln: h/k = vorheriger, j/l = naechster Tab -- deckungsgleich
+        // mit Zellijs eigenem tab-Modus weiter unten (Ctrl+T, dann h/j/k/l).
+        // Fokus und Tabwechsel teilen sich absichtlich nie einen Shortcut:
+        // Tabs liegen auf Alt/Super pur, Fokus eine Ebene tiefer auf +Shift.
+        bind "Alt h" "Super h" { GoToPreviousTab; }
+        bind "Alt j" "Super j" { GoToNextTab; }
+        bind "Alt k" "Super k" { GoToPreviousTab; }
+        bind "Alt l" "Super l" { GoToNextTab; }
+        bind "Alt left" "Super left" { GoToPreviousTab; }
+        bind "Alt up" "Super up" { GoToPreviousTab; }
+        bind "Alt down" "Super down" { GoToNextTab; }
+        bind "Alt right" "Super right" { GoToNextTab; }
         bind "Ctrl left" { GoToPreviousTab; }
         bind "Ctrl right" { GoToNextTab; }
+
+        // Panes fokussieren: reiner vim-Griff, h=links j=unten k=oben l=rechts.
+        // Kein MoveFocusOrTab mehr -- Fokus wechselt nie in einen Tabwechsel.
+        bind "Alt Shift h" "Super Shift h" { MoveFocus "left"; }
+        bind "Alt Shift j" "Super Shift j" { MoveFocus "down"; }
+        bind "Alt Shift k" "Super Shift k" { MoveFocus "up"; }
+        bind "Alt Shift l" "Super Shift l" { MoveFocus "right"; }
+        bind "Alt Shift left" "Super Shift left" { MoveFocus "left"; }
+        bind "Alt Shift down" "Super Shift down" { MoveFocus "down"; }
+        bind "Alt Shift up" "Super Shift up" { MoveFocus "up"; }
+        bind "Alt Shift right" "Super Shift right" { MoveFocus "right"; }
+
         bind "Alt +" "Super +" { Resize "Increase"; }
         bind "Alt -" "Super -" { Resize "Decrease"; }
         bind "Alt =" "Super =" { Resize "Increase"; }
@@ -166,14 +193,7 @@ keybinds clear-defaults=true {
         bind "Alt d" "Super d" { NextSwapLayout; }
         bind "Alt f" "Super f" { ToggleFloatingPanes; }
         bind "Ctrl g" { SwitchToMode "locked"; }
-        // Bewusst NUR Alt: Cmd+H ist "Ghostty ausblenden", ein AppKit-Menueintrag.
-        // Der wird vor Ghostty abgefangen, "keybind = clear" befreit ihn nicht.
-        // "Super h" wuerde nie ausgeloest und stuende hier nur irrefuehrend herum.
-        bind "Alt h" { MoveFocusOrTab "left"; }
         bind "Alt i" "Super i" { MoveTab "left"; }
-        bind "Alt j" "Super j" { MoveFocus "down"; }
-        bind "Alt k" "Super k" { MoveFocus "up"; }
-        bind "Alt l" "Super l" { MoveFocusOrTab "right"; }
         bind "Alt t" "Super t" { NewTab; }
         bind "Alt o" "Super o" { MoveTab "right"; }
         bind "Alt p" "Super p" { TogglePaneInGroup; }

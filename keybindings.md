@@ -36,15 +36,18 @@ darum ist die Datei auf beiden Plattformen identisch.
 
 ## Direktaktionen — überall außer im Locked-Modus
 
+Fokus (Panes) und Tabwechsel teilen sich **nie** denselben Shortcut: Tabs
+liegen auf `Alt`/`⌘` pur, Fokus eine Ebene tiefer auf `Alt+Shift`/`⌘⇧`.
+
 | Aktion | macOS | Windows |
 |---|---|---|
-| Fokus links / unten / oben / rechts | `⌘←` `⌘↓` `⌘↑` `⌘→` | `Alt+←` `Alt+↓` `Alt+↑` `Alt+→` |
-| Fokus unten / oben (vim) | `⌘J` / `⌘K` | `Alt+J` / `Alt+K` |
-| Fokus **links**, sonst Tab links | `⌥H` ⚠️ | `Alt+H` |
-| Fokus rechts, sonst Tab rechts | `⌘L` | `Alt+L` |
+| **Tab** vorheriger / nächster (h/k · j/l) | `⌘H`/`⌘K` · `⌘J`/`⌘L` | `Alt+H`/`Alt+K` · `Alt+J`/`Alt+L` |
+| Tab vorheriger / nächster (Pfeile) | `⌘←`/`⌘↑` · `⌘↓`/`⌘→` | `Alt+←`/`Alt+↑` · `Alt+↓`/`Alt+→` |
+| Tab vor / zurück (Alternative) | `⌃←` / `⌃→` | `Ctrl+←` / `Ctrl+→` |
+| **Fokus** links / unten / oben / rechts | `⌘⇧H` `⌘⇧J` `⌘⇧K` `⌘⇧L` | `Alt+⇧H` `Alt+⇧J` `Alt+⇧K` `Alt+⇧L` |
+| Fokus (Pfeile) | `⌘⇧←` `⌘⇧↓` `⌘⇧↑` `⌘⇧→` | `Alt+⇧←` `Alt+⇧↓` `Alt+⇧↑` `Alt+⇧→` |
 | Neuer Tab | `⌘T` | `Alt+T` |
 | Tab nach links / rechts verschieben | `⌘I` / `⌘O` | `Alt+I` / `Alt+O` |
-| Tab vor / zurück | `⌃←` / `⌃→` | `Ctrl+←` / `Ctrl+→` |
 | Floating Panes an/aus | `⌘F` | `Alt+F` |
 | Pane größer / kleiner | `⌘+` / `⌘-` | `Alt++` / `Alt+-` |
 | Layout weiter / zurück | `⌘D` / `⌘U` | `Alt+D` / `Alt+U` |
@@ -52,8 +55,19 @@ darum ist die Datei auf beiden Plattformen identisch.
 | Locked-Modus an/aus | `⌃G` | `Ctrl+G` |
 | Zellij beenden | `⌃Q` | `Ctrl+Q` |
 
-⚠️ **Die einzige Ausnahme:** `⌘H` ist auf dem Mac „Ghostty ausblenden" — ein
-AppKit-Menüeintrag, den `keybind = clear` nicht freiräumt. Dafür `⌥H` benutzen.
+Tab-Zuordnung h/k = vorheriger, j/l = nächster ist deckungsgleich mit Zellijs
+eigenem Tab-Modus (`Ctrl+T`, dann `h`/`k`/`j`/`l`) — bewusst dieselbe Richtung,
+damit man sich nicht zwei Konventionen merken muss.
+
+`⌘H` war früher „Ghostty ausblenden" (AppKit-Menüeintrag, von
+`keybind = clear` nicht erreichbar) — deshalb bislang nur `⌥H`, ohne Cmd.
+Sobald Hide in den macOS-Kurzbefehl-Einstellungen (Tastatur → Kurzbefehle →
+App-Kurzbefehle) auf einen anderen Kurzbefehl verlegt ist, ist `⌘H` frei;
+geprüft über:
+
+```bash
+defaults read com.mitchellh.ghostty NSUserKeyEquivalents
+```
 
 ## Modi — auf beiden Plattformen identisch
 
