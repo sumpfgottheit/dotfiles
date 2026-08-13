@@ -109,10 +109,19 @@ Zyklus mit `⌘D` / `Alt+D`, rückwärts `⌘U` / `Alt+U`:
 
 Definiert in `~/.config/zellij/layouts/default.kdl`. Sobald diese Datei
 existiert, ersetzt sie die eingebauten Swap-Layouts vollständig — `vertical`,
-`horizontal` und `stacked` sind deshalb dort mit aufgeführt. `tab_template` und
-`swap_tiled_layout` müssen in einer Layout-Datei **innerhalb** des
-`layout`-Knotens stehen; auf oberster Ebene stehen sie nur in einer separaten
-`.swap.kdl`.
+`horizontal` und `stacked` sind deshalb dort mit aufgeführt.
+
+Drei Fallstricke beim Schreiben dieser Datei:
+
+1. `default_tab_template` benutzen, **nicht** `tab_template name="…"`. Ein
+   benanntes Template greift nur dort, wo es angefordert wird — zur Laufzeit
+   per `NewTab` erzeugte Tabs bekämen sonst weder Tab- noch Statusleiste.
+2. `default_tab_template` und `swap_tiled_layout` müssen **innerhalb** des
+   `layout`-Knotens stehen. Auf oberster Ebene stehen sie nur in einer
+   separaten `.swap.kdl` — so gibt `zellij setup --dump-swap-layout` sie aus,
+   was leicht in die Irre führt.
+3. In den Swap-Layouts `tab` als Knotennamen verwenden, damit
+   `default_tab_template` auch dort greift.
 
 ## Terminal-Emulator
 
