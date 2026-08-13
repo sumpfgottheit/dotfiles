@@ -122,6 +122,11 @@ Drei Fallstricke beim Schreiben dieser Datei:
    was leicht in die Irre führt.
 3. In den Swap-Layouts `tab` als Knotennamen verwenden, damit
    `default_tab_template` auch dort greift.
+4. `max_panes` zählt die Plugin-Panes des Templates mit — Tab-Leiste und
+   Statusleiste sind je ein Pane. Es gilt also `max_panes = sichtbare Panes + 2`,
+   im Grid daher 4/6/8 für 2/4/6 echte Panes. Mit 2/4/6 greift bei vier Panes
+   fälschlich das 3×2-Raster und füllt nur 3 + 1 statt 2×2. Zellijs eingebautes
+   `horizontal` zeigt dieselbe Differenz: zwei deklarierte Panes, `max_panes=4`.
 
 ## Terminal-Emulator
 

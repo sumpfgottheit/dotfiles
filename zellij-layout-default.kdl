@@ -30,20 +30,25 @@ layout {
         pane
     }
 
+    // ACHTUNG: max_panes zaehlt die Plugin-Panes des Tab-Templates mit.
+    // Tab-Leiste und Statusleiste sind je ein Pane, also gilt
+    //     max_panes = sichtbare Panes + 2
+    // Deshalb 4/6/8 fuer 2/4/6 echte Panes. Mit 2/4/6 griff bei vier Panes
+    // faelschlich das 3x2-Raster und fuellte nur 3 + 1 statt 2x2.
     swap_tiled_layout name="grid" {
-        tab max_panes=2 {
+        tab max_panes=4 {
             pane split_direction="vertical" {
                 pane
                 pane
             }
         }
-        tab max_panes=4 {
+        tab max_panes=6 {
             pane {
                 pane split_direction="vertical" { pane; pane; }
                 pane split_direction="vertical" { pane; pane; }
             }
         }
-        tab max_panes=6 {
+        tab max_panes=8 {
             pane {
                 pane split_direction="vertical" { pane; pane; pane; }
                 pane split_direction="vertical" { pane; pane; pane; }
