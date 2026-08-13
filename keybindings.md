@@ -45,6 +45,10 @@ liegen auf `Alt`/`⌘` pur, Fokus eine Ebene tiefer auf `Alt+Shift`/`⌘⇧`.
 | **Tab** nächster (k/l) | `⌘K` / `⌘L` | `Alt+K` / `Alt+L` |
 | Tab vorheriger (Pfeile) | `⌘←` / `⌘↓` | `Alt+←` / `Alt+↓` |
 | Tab nächster (Pfeile) | `⌘↑` / `⌘→` | `Alt+↑` / `Alt+→` |
+
+`Ctrl+←`/`Ctrl+→` als Tab-Alternative wurde entfernt: macOS reserviert diese
+Kombination systemweit für den Spaces-Wechsel in Mission Control und lässt
+sie nie bis zum Terminal durch.
 | Tab vor / zurück (Alternative) | `⌃←` / `⌃→` | `Ctrl+←` / `Ctrl+→` |
 | **Fokus** links / unten / oben / rechts | `⌘⇧H` `⌘⇧J` `⌘⇧K` `⌘⇧L` | `Alt+⇧H` `Alt+⇧J` `Alt+⇧K` `Alt+⇧L` |
 | Fokus (Pfeile) | `⌘⇧←` `⌘⇧↓` `⌘⇧↑` `⌘⇧→` | `Alt+⇧←` `Alt+⇧↓` `Alt+⇧↑` `Alt+⇧→` |

@@ -174,8 +174,6 @@ keybinds clear-defaults=true {
         bind "Alt down" "Super down" { GoToPreviousTab; }
         bind "Alt up" "Super up" { GoToNextTab; }
         bind "Alt right" "Super right" { GoToNextTab; }
-        bind "Ctrl left" { GoToPreviousTab; }
-        bind "Ctrl right" { GoToNextTab; }
 
         // Panes fokussieren: reiner vim-Griff, h=links j=unten k=oben l=rechts.
         // Kein MoveFocusOrTab mehr -- Fokus wechselt nie in einen Tabwechsel.
