@@ -23,6 +23,15 @@ if type brew &>/dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Alle Bash-Completions aus ~/.bash_completions/ laden
+if [ -d "$HOME/.bash_completions" ]; then
+  for file in "$HOME/.bash_completions/"*; do
+    # Sicherstellen, dass die Datei existiert und lesbar ist (verhindert Fehler bei leerem Ordner)
+    [ -r "$file" ] && source "$file"
+  done
+  unset file
+fi
+
 if command -v gls &>/dev/null; then
   alias ls='gls --color=auto'
   alias ll='gls -lah --color=auto'
@@ -65,13 +74,15 @@ which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
 which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
 
-source '/Users/saf/.bash_completions/skillgarden.sh'
-
-source '/Users/saf/.bash_completions/generate-ai-config.sh'
-
 # fastfetch writes to /dev/tty (not stdout) so its banner can never land
 # inside direnv's captured JSON output on shell startup, which otherwise
 # breaks direnv with: invalid character '.' looking for beginning of value
 if [[ $- == *i* ]] && [[ $(uname) == 'Darwin' ]]; then
   [[ -x /opt/homebrew/bin/fastfetch ]] && /opt/homebrew/bin/fastfetch >/dev/tty
+fi
+
+if [[ -d $HOME/.nvm ]] ; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
