@@ -73,6 +73,7 @@ export LANG='en_US.UTF-8'
 which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
 which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
+which lazygit 2>/dev/null >/dev/null && alias lg="$(which lazygit)"
 
 # fastfetch writes to /dev/tty (not stdout) so its banner can never land
 # inside direnv's captured JSON output on shell startup, which otherwise
