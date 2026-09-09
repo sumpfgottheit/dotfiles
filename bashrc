@@ -11,6 +11,12 @@ fi
 
 [[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
 
+# Homebrew shellenv (Linuxbrew / macOS ARM / macOS Intel)
+for BREW in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+  [[ -x "$BREW" ]] && eval "$("$BREW" shellenv)" && break
+done
+
+# Bash-Completions aus dem Homebrew-Prefix laden
 if type brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
   if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
@@ -20,7 +26,6 @@ if type brew &>/dev/null; then
       [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
     done
   fi
-  eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
 # Alle Bash-Completions aus ~/.bash_completions/ laden
@@ -57,6 +62,7 @@ alias la='ls -lha'
 alias view='vi -R'
 alias vi='vim'
 alias nano='vim'
+which lazygit 2>/dev/null >/dev/null && alias lg="$(which lazygit)"
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -73,7 +79,6 @@ export LANG='en_US.UTF-8'
 which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
 which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
 which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
-which lazygit 2>/dev/null >/dev/null && alias lg="$(which lazygit)"
 
 # fastfetch writes to /dev/tty (not stdout) so its banner can never land
 # inside direnv's captured JSON output on shell startup, which otherwise
