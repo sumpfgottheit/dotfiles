@@ -9,22 +9,23 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
 
-[[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
-
 # Homebrew shellenv (Linuxbrew / macOS ARM / macOS Intel)
-for BREW in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
-  [[ -x "$BREW" ]] && eval "$("$BREW" shellenv)" && break
+for BREW in \
+    /home/linuxbrew/.linuxbrew/bin/brew \
+    /opt/homebrew/bin/brew \
+    /usr/local/bin/brew
+do
+  if [[ -x "$BREW" ]]; then
+    eval "$("$BREW" shellenv)"
+    break
+  fi
 done
+unset BREW
 
-# Bash-Completions aus dem Homebrew-Prefix laden
-if type brew &>/dev/null; then
-  HOMEBREW_PREFIX="$(brew --prefix)"
-  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
-    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
-  else
-    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
-      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
-    done
+# Homebrew bash-completion
+if command -v brew >/dev/null 2>&1; then
+  if [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
+    source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
   fi
 fi
 
@@ -62,7 +63,9 @@ alias la='ls -lha'
 alias view='vi -R'
 alias vi='vim'
 alias nano='vim'
-which lazygit 2>/dev/null >/dev/null && alias lg="$(which lazygit)"
+if command -v lazygit >/dev/null 2>&1; then
+  alias lg='lazygit'
+fi
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
@@ -74,11 +77,9 @@ export LANG='en_US.UTF-8'
 [[ -d $HOME/go/bin ]] && export PATH=$HOME/go/bin:$PATH
 [[ -d $HOME/apps/bin ]] && export PATH=$HOME/apps/bin:$PATH
 
-[[ -d ${HOME}/.bash_profile ]] && . ${HOME}/.bash_profile
-
-which direnv 2>/dev/null >/dev/null && eval "$(direnv hook bash)"
-which starship 2>/dev/null >/dev/null && eval "$(starship init bash)"
-which fzf 2>/dev/null >/dev/null && eval "$(fzf --bash)"
+command -v direnv >/dev/null 2>&1 && eval "$(direnv hook bash)"
+command -v starship >/dev/null 2>&1 && eval "$(starship init bash)"
+command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
 
 # fastfetch writes to /dev/tty (not stdout) so its banner can never land
 # inside direnv's captured JSON output on shell startup, which otherwise
