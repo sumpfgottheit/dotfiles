@@ -9,23 +9,32 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
   source /etc/profile.d/vte.sh
 fi
 
+[[ -x /usr/local/bin/greadlink ]] && export READLINK=/usr/local/bin/greadlink || export READLINK=$(which readlink)
+
 # Homebrew shellenv (Linuxbrew / macOS ARM / macOS Intel)
-for BREW in \
-    /home/linuxbrew/.linuxbrew/bin/brew \
-    /opt/homebrew/bin/brew \
-    /usr/local/bin/brew
-do
-  if [[ -x "$BREW" ]]; then
-    eval "$("$BREW" shellenv)"
-    break
-  fi
+for BREW in /home/linuxbrew/.linuxbrew/bin/brew /opt/homebrew/bin/brew /usr/local/bin/brew; do
+  [[ -x "$BREW" ]] && eval "$("$BREW" shellenv)" && break
 done
-unset BREW
 
 # Homebrew bash-completion
 if command -v brew >/dev/null 2>&1; then
-  if [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]]; then
-    source "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+  HOMEBREW_PREFIX="$(brew --prefix)"
+
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  elif [[ -d "${HOMEBREW_PREFIX}/etc/bash_completion.d" ]]; then
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+    unset COMPLETION
+  fi
+
+  # Linuxbrew: bash-completion may leave `just` on the generic `_minimal`
+  # fallback instead of loading Homebrew's runtime-generated completion.
+  # Source it explicitly on Linux. macOS keeps the normal lazy-loading path.
+  if [[ "$(uname)" == "Linux" ]] && \
+     [[ -r "${HOMEBREW_PREFIX}/etc/bash_completion.d/just" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/bash_completion.d/just"
   fi
 fi
 
@@ -63,9 +72,7 @@ alias la='ls -lha'
 alias view='vi -R'
 alias vi='vim'
 alias nano='vim'
-if command -v lazygit >/dev/null 2>&1; then
-  alias lg='lazygit'
-fi
+command -v lazygit >/dev/null 2>&1 && alias lg='lazygit'
 
 export EDITOR=vim
 export PS1="\u@\h:\w # "
